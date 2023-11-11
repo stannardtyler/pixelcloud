@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project SCMC</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- import the webpage's javascript file 
+    <script src="/script.js" defer></script>
+-->
+
+    <style>
+      body {
+        background-color: black;
+        /*background-image: url("https://cdn.glitch.com/67722b6f-4a71-4455-82f4-bb8279291eb1%2FStannard_Exhibition_Luster-2223.jpg?v=1614201552582");*/
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-position: center;
+      }
+
+      header {
+        text-align: center;
+        margin: auto;
+        margin-top: 250px;
+      }
+    </style>
+
+    <!-- Import the component -->
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <h1 style="margin-top:20px">
+        3D CONTROLS
+      </h1>
+      <p style="text-align:justify; margin-left:100px;">
+        Use your Left Mouse Button (LMB) to Orbit around the object.
+        <br />
+        Use Shift + LMB to Move the Object / Pan View.
+        <br />
+        Use Scroll Wheel to Zoom In.
+        <br />
+        3D Model Viewer Source Code
+        <a href="https://modelviewer.dev/" target="_blank">Documentation</a>
+      </p>
+    </header>
+
+    <div class="flex-center">
+      <nav>
+        <ul>
+          <li><a href="hero.html">Enter</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container"></div>
+
+    <footer>
+      <a href="https://santaclaramissioncemetery.org/" target="_blank">SCMC</a>
+      ||
+      <a href="https://en.wikipedia.org/wiki/Photogrammetry#:~:text=Photogrammetry%20is%20the%20science%20and,radiant%20imagery%20and%20other%20phenomena." target="_blank">PHOTOGRAMMETRY</a>
+      ||
+      <a href="index.html">HOME</a>
+    </footer>
+  </body>
+</html>

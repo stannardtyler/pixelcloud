@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pixel Cloud</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <div id="info">
+      <a href="index.html">Home</a>
+        <div>
+        Santa Clara, CA - 37.3541° N, 121.9552° W;
+      </div>
+    </div>
+
+    <div id="my-gui-container"></div>
+
+    <script type="module">
+      ////- Importing the goods -///
+      import * as THREE from "/build/three.module.js";
+      import { GUI } from "/libs/dat.gui.module.js";
+      import { GLTFLoader } from "/loaders/GLTFLoader.js";
+      import { TrackballControls } from "/controls/TrackballControls2.js";
+      import { EffectComposer } from "/postprocessing/EffectComposer.js";
+      import { RenderPass } from "/postprocessing/RenderPass.js";
+      import { ShaderPass } from "/postprocessing/ShaderPass.js";
+      import { PixelShader } from "/shaders/PixelShader.js";
+
+      ////- Create variables for the objects in the scene -////
+      let camera, scene, renderer, gui, composer, controls;
+      let pixelPass, params;
+
+      let group;
+      let model;
+
+      let pNum;
+
+      const start = Date.now();
+
+      init();
+      animate();
+
+      function updateGUI() {
+        pixelPass.uniforms["pixelSize"].value = params.pixelSize;
+      }
+
+      function init() {
+        const container = document.getElementById("container");
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.set(0, 0, 50);
+        controls = new TrackballControls(camera, renderer.domElement);
+        controls.rotateSpeed = 2.0;
+        controls.panSpeed = 0.8;
+        controls.zoomSpeed = 1.5;
+
+        scene = new THREE.Scene();
+
+        const hemisphereLight = new THREE.HemisphereLight(
+          0xfceafc,
+          0x000000,
+          1
+        );
+        scene.add(hemisphereLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        dirLight.position.set(150, 75, 150);
+        scene.add(dirLight);
+
+        const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.2);
+        dirLight2.position.set(-150, 75, -150);
+        scene.add(dirLight2);
+
+        const dirLight3 = new THREE.DirectionalLight(0xffffff, 0.5);
+        dirLight3.position.set(0, 125, 0);
+        scene.add(dirLight3);
+
+        composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+
+        pixelPass = new ShaderPass(PixelShader);
+        pixelPass.uniforms["resolution"].value = new THREE.Vector2(
+          window.innerWidth,
+          window.innerHeight
+        );
+        pixelPass.uniforms["resolution"].value.multiplyScalar(
+          window.devicePixelRatio
+        );
+        composer.addPass(pixelPass);
+
+        window.addEventListener("resize", onWindowResize);
+
+        //parameter of pixelation interface
+        params = {
+          pixelSize: 16,
+          postprocessing: true
+        };
+        //interface setup
+        gui = new GUI();
+        var GUIContainer = document.getElementById("my-gui-container");
+        GUIContainer.appendChild(gui.domElement);
+        gui.closed = true; // this "closes" the panel
+        gui
+          .add(params, "pixelSize")
+          .min(2)
+          .max(64)
+          .step(2);
+        //gui.add(params, "postprocessing");
+        //GUI.toggleHide(); //hides GUI
+
+        /////-- gltf loader --/////
+        // Instantiate a loader
+        const loader = new GLTFLoader();
+
+        // Load a glTF resource
+        loader.load(
+          // resource URL
+          "https://cdn.glitch.com/03bf0f4f-412c-4b00-bdde-f6949c127f34%2Fdre.glb?v=1621061939978",
+          // called when the resource is loaded
+          function(gltf) {
+            scene.add(gltf.scene);
+
+            model = gltf.scene;
+
+            gltf.animations; // Array<THREE.AnimationClip>
+            gltf.scene; // THREE.Group
+            gltf.scenes; // Array<THREE.Group>
+            gltf.cameras; // Array<THREE.Camera>
+            gltf.asset; // Object
+            model.scale.set(5, 5, 5); // Object Scale
+            model.position.y = 5; // Object Position
+          },
+          // called while loading is progressing
+          function(xhr) {
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          },
+          // called when loading has errors
+          function(error) {
+            console.log("An error happened");
+          }
+        );
+      }
+
+      //render camera view to screen size
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        pixelPass.uniforms["resolution"].value
+          .set(window.innerWidth, window.innerHeight)
+          .multiplyScalar(window.devicePixelRatio);
+      }
+
+      //update function
+      function update() {
+        controls.update();
+        updateGUI();
+        //pNum += 0.05;
+        //console.log(params);
+      }
+
+      //document.getElementById("demo").onclick = function() {hideGUI()};
+      // function hideGUI() {
+      //   document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+      //   GUI.toggleHide();
+      // }
+
+      //animate function - calls update and render
+      function animate() {
+        update();
+        render();
+
+        if (params.postprocessing) {
+          composer.render();
+        } else {
+          renderer.render(scene, camera);
+        }
+        //window.requestAnimationFrame(animate);
+      }
+
+      // render function
+      function render() {
+        window.requestAnimationFrame(animate); //had to move the request for animationframe in ther renderer
+        const timer = Date.now() - start;
+
+        model.rotation.x += 0.0003;
+        model.rotation.z += 0.0001;
+        //model.rotation.x = timer * 0.0003;
+        //model.rotation.z = timer * 0.0002;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Project SCMC</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- import the webpage's javascript file 
+    <script src="/script.js" defer></script>
+-->
+
+    <style>
+      body {
+        background-color: black;
+        /*background-image: url("https://cdn.glitch.com/3559418b-0a3b-4d6d-8df2-556730e2faf5%2Fimage0.jpg?v=1617591519779");*/
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      header {
+        text-align: center;
+        margin: auto;
+        margin-top: 200px;
+      }
+    </style>
+
+    <style>
+      #blocker {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      #instructions {
+        width: 100%;
+        height: 100%;
+
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+
+        -webkit-box-orient: horizontal;
+        -moz-box-orient: horizontal;
+        box-orient: horizontal;
+
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        box-pack: center;
+
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+
+        color: #ffffff;
+        text-align: center;
+        font-family: Arial;
+        font-size: 14px;
+        line-height: 24px;
+
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- Import the component -->
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <div id="blocker">
+      <div id="instructions">
+        <header>
+          <h1 style="margin-top:20px; margin-bottom:0;">
+            Untitled Explorer
+          </h1>
+
+          <div class="flex-center">
+            <nav>
+              <ul>
+                <li><a href="fly.html">Start</a></li>
+                <li><a href="webgl_effects_ascii.html">Example Backup</a></li>
+                <li><a href="hero.html">Read Me</a></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+
+        <footer>
+          <a href="https://santaclaramissioncemetery.org/" target="_blank"
+            >SCMC</a
+          >
+          ||
+          <a
+            href="https://en.wikipedia.org/wiki/Photogrammetry#:~:text=Photogrammetry%20is%20the%20science%20and,radiant%20imagery%20and%20other%20phenomena."
+            target="_blank"
+            >PHOTOGRAMMETRY</a
+          >
+          ||
+          <a href="controls.html">3D CONTROLS</a>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/build/three.min.js"></script>
+    <script src="/pointcloud.js"></script>
+    <script src="/loaders/OBJLoader.js"></script>
+    <script type="module" src="/controls/OrbitControls.js"></script>
+  </body>
+</html>
