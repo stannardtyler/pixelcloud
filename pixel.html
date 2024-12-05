@@ -18,7 +18,7 @@
         Henry Cowell Redwoods State Park, CA - 37.0536° N, 122.0976° W;
       </div>
     </div>
-    
+
     <div id="my-gui-container">
     </div>
 
@@ -113,7 +113,7 @@
         gui = new GUI({ autoPlace: false });
         var GUIContainer = document.getElementById('my-gui-container');
         GUIContainer.appendChild(gui.domElement);
-        gui.closed = true; // this "closes" the panel 
+        gui.closed = true; // this "closes" the panel
         gui
           .add(params, "pixelSize")
           .min(2)
@@ -129,7 +129,7 @@
         // Load a glTF resource
         loader.load(
           // resource URL
-          "models/tree_down.glb",
+          "models/big_stump.glb",
           // called when the resource is loaded
           function(gltf) {
             scene.add(gltf.scene);

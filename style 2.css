@@ -1,0 +1,306 @@
+/* CSS files add styling rules to your content */
+
+/* 
+SCMC Color Palatte {
+
+beige - #e5dfd3
+red - #79221e
+black - #120d04
+white - #fefefe
+
+}
+*/
+
+/* @import url("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap"); */
+
+@font-face {
+    font-family: "PIXEL-LI";
+    src: url("https://cdn.glitch.com/03bf0f4f-412c-4b00-bdde-f6949c127f34%2FPIXEL-LI.TTF?v=1621111863003");
+}
+
+.rainbow-text {
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body {
+  font-family: "PIXEL-LI";
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-size: 50px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+h1 {
+margin-top: 25px; 
+margin-bottom: 0;
+}
+
+p {
+  text-align: justify;
+}
+
+img {
+  /*   max-width: 100%; */
+}
+
+a:link,
+a:visited,
+a:active {
+  color: white;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: yellow;
+}
+
+nav {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 14px 16px;
+}
+
+li a:hover {
+  background-color: white;
+  font-weight: bold;
+}
+
+header {
+  color: white;
+  text-align: center;
+  top: 0;
+/*   width: 50%; */
+/*   margin: auto; */
+/*   margin-top: 200px; */
+  font-style: italic;
+  font-weight: bold;
+/*   max-width: 1000px; */
+  
+}
+
+#blocker {
+  position: absolute;
+  width: 100%;
+/*   background-color: rgba(0, 0, 0, 0.5); */
+}
+
+#instructions {
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+
+  color: black;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  /*   cursor: pointer; */
+}
+
+.container {
+  margin-right: 15em;
+  margin-left: 15em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 50px 50px;
+  grid-template-columns: auto auto;
+  /*   background-color: #2196F3; */
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: black;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.grid-item img {
+  max-width: 200px;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+}
+.card .img-top {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.card:hover .img-top {
+  display: inline;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+#info {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1; /* TODO Solve this in HTML */
+}
+
+a,
+button,
+input,
+select {
+  pointer-events: auto;
+}
+
+.dg.ac {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2 !important; /* TODO Solve this in HTML */
+}
+
+#overlay {
+  position: absolute;
+  font-size: 16px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#overlay button {
+  background: transparent;
+  border: 0;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#notSupported {
+  width: 50%;
+  margin: auto;
+  background-color: #f00;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+
+/*Responsive CSS */
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
